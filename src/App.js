@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './Components/Login'
+import Signin from './Components/Signin'
 import './App.css';
 
 class App extends Component {
@@ -9,10 +9,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Welcome to Ideaz</h1>
         </header>
-        <p className="App-intro">
-          To get started, sign in or create an account.
-        </p>
-        <Login />
+        <Signin />
       </div>
     );
   }
