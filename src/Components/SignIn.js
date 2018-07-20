@@ -1,31 +1,25 @@
 import React, {Component} from 'react';
 
 class SignIn extends Component {
-    constructor() {
-        super();
-        this.state = {authParams: {}}
-    }
-
     handleSubmit(e) {
-        this.setState({
-            authParams: {
-                email: this.refs.email.value,
-                password: this.refs.password.value
-            }
-        }, function () {
-            fetch('http://localhost:3000/auth/signin', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.authParams)
-            }).then(results => {
-                return results.json();
-            }).then(data => {
-                console.log(data);
-            })
-        });
+        var authParams = {
+            email: this.refs.email.value,
+            password: this.refs.password.value
+        }
+
+        fetch('http://localhost:3000/auth/signin', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(authParams)
+        }).then(results => {
+            return results.json();
+        }).then(json => {
+            sessionStorage.setItem('authToken', json.data.attributes);
+            console.log(sessionStorage.getItem('authToken'));
+        })
         e.preventDefault();
     }
 
