@@ -17,8 +17,7 @@ class SignIn extends Component {
         }).then(results => {
             return results.json();
         }).then(json => {
-            sessionStorage.setItem('authToken', json.data.attributes);
-            console.log(sessionStorage.getItem('authToken'));
+            sessionStorage.setItem('authToken', json.data.attributes.accessToken);
         })
         e.preventDefault();
     }
