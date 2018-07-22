@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
+import {NavLink} from 'react-router-dom'
 
 class SignIn extends Component {
     handleSubmit(e) {
-        var authParams = {
+        let authParams = {
             email: this.refs.email.value,
             password: this.refs.password.value
-        }
+        };
 
-        fetch('http://localhost:3000/auth/signin', {
+        fetch('http://localhost:3000/auth/sign-in', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -35,6 +36,8 @@ class SignIn extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary">Sign in</button>
                 </form>
+                <br/>
+                <small>Or <NavLink to="/sign-up">sign up</NavLink></small>
             </div>
         );
     }

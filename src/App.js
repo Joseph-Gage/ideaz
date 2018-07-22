@@ -1,6 +1,10 @@
-import React, {Component} from 'react';
-import SignIn from './Components/SignIn'
-import './App.css';
+import React, {Component} from 'react'
+import {Provider} from 'react-redux'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import './App.css'
+import SignUp from "./Components/SignUp";
+import SignIn from "./Components/SignIn";
 
 class App extends Component {
     render() {
@@ -12,7 +16,14 @@ class App extends Component {
                 <div className="row">
                     <div className="col-sm"></div>
                     <div className="col-sm">
-                        <SignIn/>
+                        <Provider store={this.props.store}>
+                            <Router>
+                                <Switch>
+                                    <Route exact path="/" component={SignIn}/>
+                                    <Route path="/sign-up" component={SignUp}/>
+                                </Switch>
+                            </Router>
+                        </Provider>
                     </div>
                     <div className="col-sm"></div>
                 </div>
@@ -20,5 +31,9 @@ class App extends Component {
         );
     }
 }
+
+App.propTypes = {
+    store: PropTypes.object.isRequired
+};
 
 export default App;
