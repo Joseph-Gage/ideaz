@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 class SignUp extends Component {
     handleSubmit(e) {
         let signUpParams = {
-            username: this.refs.username,
+            name: this.refs.username.value,
             email: this.refs.email.value,
             password: this.refs.password.value,
             passwordConfirmation: this.refs.passwordConfirmation.value
@@ -19,9 +19,8 @@ class SignUp extends Component {
         }).then(results => {
             return results.json();
         }).then(json => {
-            //sessionStorage.setItem('authToken', json.data.attributes.accessToken);
-            console.log(json);
-        })
+            sessionStorage.setItem('accessToken', json.data.attributes.accessToken);
+        });
         e.preventDefault();
     }
 
@@ -31,7 +30,7 @@ class SignUp extends Component {
                 <h2>Sign up</h2>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className="form-group">
-                        <input className="form-control" ref="username" placeholder="Username"></input>
+                        <input type="text" className="form-control" ref="username" placeholder="Username"></input>
                     </div>
                     <div className="form-group">
                         <input type="email" className="form-control" ref="email" placeholder="Email address"></input>
@@ -43,7 +42,7 @@ class SignUp extends Component {
                         <input type="password" className="form-control" ref="passwordConfirmation"
                                placeholder="Confirm password"></input>
                     </div>
-                    <button type="submit" className="btn btn-primary">Sign up</button>
+                    <button type="submit" className="btn btn-primary">Create account</button>
                 </form>
             </div>
         );
