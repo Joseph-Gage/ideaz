@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {Provider} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import React, { Component } from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './App.css'
 import SignUp from "./Components/SignUp";

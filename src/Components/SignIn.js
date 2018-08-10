@@ -1,7 +1,15 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { updateLoggedIn } from '../Actions'
 
-class SignIn extends Component {
+const mapDispatchToProps = dispatch => {
+    return {
+        updateLoggedIn: isLoggedIn => dispatch(updateLoggedIn(isLoggedIn))
+    };
+};
+
+class ConnectedSignIn extends Component {
     handleSubmit(e) {
         let authParams = {
             email: this.refs.email.value,
@@ -19,7 +27,8 @@ class SignIn extends Component {
             return results.json();
         }).then(json => {
             sessionStorage.setItem('accessToken', json.data.attributes.accessToken);
-        })
+            this.props.updateLoggedIn(true);
+        });
         e.preventDefault();
     }
 
@@ -42,5 +51,7 @@ class SignIn extends Component {
         );
     }
 }
+
+const SignIn = connect(null, mapDispatchToProps)(ConnectedSignIn);
 
 export default SignIn;
