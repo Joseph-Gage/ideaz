@@ -3,8 +3,9 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './App.css'
-import SignUp from "./Components/SignUp";
-import SignIn from "./Components/SignIn";
+import SignUp from './Components/SignUp'
+import SignIn from './Components/SignIn'
+import Ideas from './Components/Ideas'
 
 class App extends Component {
     render() {
@@ -21,6 +22,7 @@ class App extends Component {
                                 <Switch>
                                     <Route exact path="/" component={SignIn}/>
                                     <Route path="/sign-up" component={SignUp}/>
+                                    <Route path="/ideas" component={Ideas}/>
                                 </Switch>
                             </Router>
                         </Provider>

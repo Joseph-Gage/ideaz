@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { updateLoggedIn } from '../Actions'
 
 const mapDispatchToProps = dispatch => {
@@ -10,6 +10,14 @@ const mapDispatchToProps = dispatch => {
 };
 
 class ConnectedSignIn extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            shouldRedirect: false
+        }
+    }
+
     handleSubmit(e) {
         let authParams = {
             email: this.refs.email.value,
@@ -28,11 +36,17 @@ class ConnectedSignIn extends Component {
         }).then(json => {
             sessionStorage.setItem('accessToken', json.data.attributes.accessToken);
             this.props.updateLoggedIn(true);
+            this.setState({ shouldRedirect: true })
         });
         e.preventDefault();
     }
 
     render() {
+        if (this.state.shouldRedirect) {
+            return (
+                <Redirect push to="/ideas"/>
+            )
+        }
         return (
             <div className="SignIn">
                 <h2>Sign in</h2>
