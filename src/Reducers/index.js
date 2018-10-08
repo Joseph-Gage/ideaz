@@ -1,15 +1,15 @@
-import { UPDATE_LOGGED_IN } from "../Constants/action-types";
+import { UPDATE_SIGNED_IN } from '../Constants/action-types';
 
 const initialState = {
-    isLoggedIn: false
+    isSignedIn: false
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_LOGGED_IN:
+        case UPDATE_SIGNED_IN:
             return {
                 ...state,
-                isLoggedIn: action.payload
+                isSignedIn: action.payload
             };
         default:
             return state;

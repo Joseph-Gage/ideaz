@@ -1,1 +1,1 @@
-export const UPDATE_LOGGED_IN = 'UPDATE_LOGGED_IN';
+export const UPDATE_SIGNED_IN = 'UPDATE_SIGNED_IN';

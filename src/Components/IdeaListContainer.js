@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
+import IdeaList from './IdeaList'
 
-class Ideas extends Component {
+class IdeaListContainer extends Component {
     constructor() {
         super();
 
         this.state = {
             ideas: []
         };
-
-        this.fetchIdeas()
     }
 
-    fetchIdeas() {
+    componentDidMount() {
         fetch('http://localhost:3000/ideas', {
             method: 'GET',
             headers: {
@@ -26,20 +25,8 @@ class Ideas extends Component {
     };
 
     render() {
-        return (
-            <div className="Ideas">
-                <h2>All Ideas</h2>
-                <ul>
-                    {this.state.ideas.map((idea, i) =>
-                        <li key={i}>
-                            <h3>{idea.title}</h3>
-                            <p>{idea.description}</p>
-                        </li>
-                    )}
-                </ul>
-            </div>
-        );
+        return <IdeaList ideas={this.state.ideas}/>
     }
 }
 
-export default Ideas;
+export default IdeaListContainer;

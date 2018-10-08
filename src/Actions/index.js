@@ -1,3 +1,3 @@
-import { UPDATE_LOGGED_IN } from '../Constants/action-types'
+import { UPDATE_SIGNED_IN } from '../Constants/action-types'
 
-export const updateLoggedIn = isLoggedIn => ({ type: UPDATE_LOGGED_IN, payload: isLoggedIn });
+export const updateSignedIn = isSignedIn => ({ type: UPDATE_SIGNED_IN, payload: isSignedIn });

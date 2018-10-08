@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './App.css'
 import SignUp from './Components/SignUp'
-import SignIn from './Components/SignIn'
-import Ideas from './Components/Ideas'
+import SignInContainer from './Components/SignInContainer'
+import IdeaListContainer from './Components/IdeaListContainer'
 
 class App extends Component {
     render() {
@@ -20,9 +20,9 @@ class App extends Component {
                         <Provider store={this.props.store}>
                             <Router>
                                 <Switch>
-                                    <Route exact path="/" component={SignIn}/>
+                                    <Route exact path="/" component={SignInContainer}/>
                                     <Route path="/sign-up" component={SignUp}/>
-                                    <Route path="/ideas" component={Ideas}/>
+                                    <Route path="/ideas" component={IdeaListContainer}/>
                                 </Switch>
                             </Router>
                         </Provider>
