@@ -1,41 +1,24 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import { Switch, Route } from 'react-router-dom'
 import './App.css'
 import SignUp from './Components/SignUp'
 import SignInContainer from './Components/SignInContainer'
 import IdeaListContainer from './Components/IdeaListContainer'
+import Header from './Components/Header'
 
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <h1 className="App-title">Welcome to Ideaz</h1>
-                </header>
-                <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm">
-                        <Provider store={this.props.store}>
-                            <Router>
-                                <Switch>
-                                    <Route exact path="/" component={SignInContainer}/>
-                                    <Route path="/sign-up" component={SignUp}/>
-                                    <Route path="/ideas" component={IdeaListContainer}/>
-                                </Switch>
-                            </Router>
-                        </Provider>
-                    </div>
-                    <div className="col-sm"></div>
-                </div>
+                <Header/>
+                <Switch>
+                    <Route exact path="/" component={SignInContainer}/>
+                    <Route path="/sign-up" component={SignUp}/>
+                    <Route path="/ideas" component={IdeaListContainer}/>
+                </Switch>
             </div>
         );
     }
 }
-
-App.propTypes = {
-    store: PropTypes.object.isRequired
-};
 
 export default App;
