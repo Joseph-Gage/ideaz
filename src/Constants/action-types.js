@@ -1,1 +1,0 @@
-export const UPDATE_SIGNED_IN = 'UPDATE_SIGNED_IN';

@@ -1,57 +1,43 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { updateSignedIn } from '../Actions'
-import SignIn from "./SignIn";
+import authenticationActions from '../Actions/authenticationActions'
+import SignIn from './SignIn'
 
-const mapDispatchToProps = dispatch => {
-    return {
-        updateSignedIn: isSignedIn => dispatch(updateSignedIn(isSignedIn))
-    };
-};
-
-class ConnectedSignInContainer extends Component {
-    constructor() {
-        super();
+class SignInContainer extends Component {
+    constructor(props) {
+        super(props);
 
         this.state = {
-            shouldRedirect: false
+            email: '',
+            password: ''
         }
     }
 
-    handleSubmit = e => {
-        let authParams = {
-            email: e.target[0].value,
-            password: e.target[1].value
-        };
+    handleChange = e => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    };
 
-        fetch('http://localhost:3000/auth/sign-in', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(authParams)
-        }).then(results => {
-            return results.json();
-        }).then(json => {
-            sessionStorage.setItem('accessToken', json.data.attributes.accessToken);
-            this.props.updateSignedIn(true);
-            this.setState({ shouldRedirect: true })
-        });
+    handleSubmit = e => {
         e.preventDefault();
+        const { email, password } = this.state;
+        const { dispatch, history } = this.props;
+        if (email && password)
+            dispatch(authenticationActions.signIn(email, password, history));
     };
 
     render() {
-        if (this.state.shouldRedirect) {
-            return (
-                <Redirect push to="/ideas"/>
-            )
+        if (this.props.isSignedIn) {
+            return <Redirect push to="/ideas"/>
         }
-        return <SignIn handleSubmit={this.handleSubmit}/>
+
+        return <SignIn handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
     }
 }
 
-const SignInContainer = connect(null, mapDispatchToProps)(ConnectedSignInContainer);
+const mapStateToProps = state => {
+    return { isSignedIn: state.authenticationReducer.isSignedIn }
+};
 
-export default SignInContainer;
+export default connect(mapStateToProps)(SignInContainer);
